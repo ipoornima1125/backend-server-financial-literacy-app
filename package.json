@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "mern project",
+  "type": "module",
+  "main": "node index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipoornima1125/BookStore-app.git"
+  },
+  "author": "poornima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipoornima1125/BookStore-app/issues"
+  },
+  "homepage": "https://github.com/ipoornima1125/BookStore-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1",
+    "nodemon": "^3.1.3"
+  }
+}
