@@ -6,6 +6,7 @@ import cors from 'cors';
 import courseRoute from './route/course.route.js';
 import userRoute from './route/user.route.js';
 import contactRoute from './route/contact.route.js';
+import profileRoute from './route/profile.route.js';
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -26,8 +27,8 @@ mongoose.connect(URI, {
 
 app.use("/course", courseRoute);
 app.use("/user", userRoute);
-app.use("/contact", contactRoute)
-
+app.use("/contact", contactRoute);
+app.use("/profile",profileRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);
 });
