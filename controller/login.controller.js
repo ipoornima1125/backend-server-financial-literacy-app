@@ -9,13 +9,17 @@ const login =async(req,res)=>{
         }
         
         const {email,password}=req.body;
-        const user= await User.findOne({email});
-        const correct= await bcryptjs.compare(password,user.password);
-        if(!user||!correct){
+        const userExist= await User.findOne({email});
+        const correct= await bcryptjs.compare(password,userExist.password);
+        if(!userExist||!correct){
             return res.status(401);
         }
         else{
-            return res.status(200).json({message:'User logged in successfully'})
+            return res.status(200).json(
+                {message:'User logged in successfully',
+                token:await userExist.generateToken(),
+                userId:userExist._id.toString(),
+                })
         }
 
     }
