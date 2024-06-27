@@ -20,7 +20,6 @@ const signup=async(req,res)=>{
      {
         message:"Account created successfully",
        token:await createdUser.generateToken(),
-       userId:createdUser._id.toString(),
      })
     }   
     catch(error){

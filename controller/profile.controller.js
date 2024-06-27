@@ -11,7 +11,7 @@ const getUserProfile = async (req, res) => {
 
     res.status(200).json({
       email: user.email,
-      id: user.id,
+      // id: user._id.toString(),
     });
   } catch (error) {
     console.error('Error fetching user profile:', error);
