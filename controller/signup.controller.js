@@ -16,9 +16,12 @@ const signup=async(req,res)=>{
        })
 
        await createdUser.save()
-       res.status(201).json({
-        message:"Account created successfully"
-       })
+       res.status(201).json(
+     {
+        message:"Account created successfully",
+       token:await createdUser.generateToken(),
+       userId:createdUser._id.toString(),
+     })
     }   
     catch(error){
          console.log("Error:",error);
