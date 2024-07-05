@@ -1,4 +1,13 @@
 import mongoose from 'mongoose';
+const AnswerOptionSchema = new mongoose.Schema({
+    answerText: String,
+    isCorrect: Boolean
+  });
+  
+  const QuizQuestionSchema = new mongoose.Schema({
+    questionText: String,
+    answerOptions: [AnswerOptionSchema],
+  });
 
 const courseSchema = mongoose.Schema({
     id: Number,
@@ -7,7 +16,8 @@ const courseSchema = mongoose.Schema({
     description: String,
     quiz: String,
     duration: Number,
-    link:String
+    link:String,
+    quizQuestions:[QuizQuestionSchema],
 })
 
 const Courses = mongoose.model("courses", courseSchema)
