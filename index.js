@@ -7,6 +7,7 @@ import courseRoute from './route/course.route.js';
 import userRoute from './route/user.route.js';
 import contactRoute from './route/contact.route.js';
 import profileRoute from './route/profile.route.js';
+import geminiRoute from './route/gemini.route.js';
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.use("/course", courseRoute);
 app.use("/user", userRoute);
 app.use("/contact", contactRoute);
 app.use("/profile",profileRoute);
+app.use("/gemini",geminiRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);
 });
