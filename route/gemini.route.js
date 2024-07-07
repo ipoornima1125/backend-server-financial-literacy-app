@@ -8,7 +8,7 @@ const router = express.Router();
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 router.post('/send-to-gemini', async (req, res) => {
-  const { courseDescription } = req.body;
+  const courseDescription = req.body.courseDescription;
 
   if (!courseDescription) {
     return res.status(400).json({ error: 'courseDescription is required' });
