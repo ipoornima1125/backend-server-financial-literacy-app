@@ -10,6 +10,10 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 router.post('/send-to-gemini', async (req, res) => {
   const { courseDescription } = req.body;
 
+  if (!courseDescription) {
+    return res.status(400).json({ error: 'courseDescription is required' });
+  }
+
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const prompt = `Provide brief information about: ${courseDescription}`;
