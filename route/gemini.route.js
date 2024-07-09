@@ -19,7 +19,7 @@ router.post('/send-to-gemini', async (req, res) => {
     const responses = [];
 
     for (const question of questions) {
-      const prompt = `Tell me about question: ${question}`;
+      const prompt = `Tell me briefly in not more than 5 lines about question: ${question}`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = await response.text();
