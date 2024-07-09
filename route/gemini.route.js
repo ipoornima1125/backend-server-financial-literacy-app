@@ -8,20 +8,25 @@ const router = express.Router();
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 router.post('/send-to-gemini', async (req, res) => {
-  const courseDescription = req.body.courseDescription;
+  const { questions } = req.body;
 
-  if (!courseDescription) {
-    return res.status(400).json({ error: 'courseDescription is required' });
+  if (!questions || !Array.isArray(questions) || questions.length === 0) {
+    return res.status(400).json({ error: 'questions array is required' });
   }
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    const prompt = `Provide brief information about: ${courseDescription}`;
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = await response.text();
+    const responses = [];
 
-    res.json({ text });
+    for (const question of questions) {
+      const prompt = `Tell me about question: ${question}`;
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = await response.text();
+      responses.push({ question, text });
+    }
+
+    res.json({ responses });
   } catch (error) {
     console.error('Error sending data to Gemini API:', error);
     res.status(500).json({ error: 'Failed to communicate with Gemini API' });
