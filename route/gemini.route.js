@@ -6,8 +6,9 @@ dotenv.config();
 const router = express.Router();
 
 const openai = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.API_KEY,
-});
+})
 
 router.post('/send-to-openai', async (req, res) => {
   const { questions } = req.body;
@@ -22,8 +23,11 @@ router.post('/send-to-openai', async (req, res) => {
     for (const question of questions) {
       const prompt = `Tell me briefly in not more than 10 lines about question: ${question}`;
       const response = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
+        model: 'openchat/openchat-7b:free',
+        messages: [
+          {role:'system', content:'You give constructive and useful feedback to people'},
+          {role: 'user', content: prompt} 
+        ],
         max_tokens: 150,
       });
 
